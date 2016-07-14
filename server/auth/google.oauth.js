@@ -5,8 +5,6 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../api/users/user.model');
 var crypto = require('crypto');
 
-
-
 var decipher = crypto.createDecipher('aes-256-ctr', 'app secret')
 var clientID = decipher.update(passport.hash.clientIdHash,'hex','utf8')
 clientID += decipher.final('utf8');
