@@ -1,11 +1,11 @@
-'use strict'; 
+'use strict';
 
 var app = require('express')();
 var path = require('path');
 
 app.use(require('./logging.middleware'));
 
-app.use(require('./request-state.middleware'));
+// app.use(require('./request-state.middleware'));
 
 app.use(require('./statics.middleware'));
 

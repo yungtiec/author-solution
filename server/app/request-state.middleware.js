@@ -1,22 +1,26 @@
-'use strict'; 
+'use strict';
 
 var router = require('express').Router();
 var sessionMiddleware = require('express-session');
 var passport = require('passport');
-
+var bodyParser = require('body-parser');
 var User = require('../api/users/user.model');
+var app = require('express')();
 
-router.use(function (req, res, next) {
-  var bodyString = '';
-  req.on('data', function (chunk) {
-    bodyString += chunk;
-  });
-  req.on('end', function () {
-    bodyString = bodyString || '{}';
-    req.body = eval('(' + bodyString + ')');
-    next();
-  });
-});
+// router.use(function (req, res, next) {
+//   var bodyString = '';
+//   req.on('data', function (chunk) {
+//     bodyString += chunk;
+//   });
+//   req.on('end', function () {
+//     bodyString = bodyString || '{}';
+//     req.body = eval('(' + bodyString + ')');
+//     next();
+//   });
+// });
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 router.use(sessionMiddleware({
   secret: 'tongiscool'
@@ -51,10 +55,10 @@ router.use(function passportSessionMiddleware (req, res, next) {
   });
 });
 */
-router.use(function (req, res, next) {
-  console.log('user', req.user);
-  next();
-});
+// router.use(function (req, res, next) {
+//   console.log('user', req.user);
+//   next();
+// });
 
 // serialization happens "one" time
 passport.serializeUser(function (user, attachSomethingToTheSession) {
